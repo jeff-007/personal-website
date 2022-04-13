@@ -1,0 +1,31 @@
+/* fade-transform */
+.fade-transform-leave-active,
+.fade-transform-enter-active {
+  transition: all .3s ease-in-out;
+}
+
+.fade-transform-enter {
+  opacity: 0;
+  transform: translateX(-5px);
+}
+
+.fade-transform-leave-to {
+  opacity: 0;
+  transform: translateX(5px);
+}
+
+/* pop-transform */
+.pop-transform-leave-active,
+.pop-transform-enter-active {
+  transition: all .3s ease-in-out;
+}
+
+.pop-transform-enter {
+  opacity: 0;
+  transform: translateY(-10px);
+}
+
+.pop-transform-leave-to {
+  opacity: 0;
+  transform: translateY(10px);
+}

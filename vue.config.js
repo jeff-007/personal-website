@@ -63,7 +63,7 @@ module.exports = {
     loaderOptions: {
       scss: {
         // 在 sass-loader v8 中，这个选项名是 "prependData"
-        additionalData: '@import "~@/styles/variables.scss";'
+        prependData: '@import "~@/styles/variables.scss";'
       }
     }
   }
