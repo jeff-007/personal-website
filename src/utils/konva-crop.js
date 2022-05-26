@@ -129,7 +129,12 @@ import Konva from 'konva'
   }
 
   Konva.Image.prototype.cropStart = function (context) {
-    this.getStage().find('Transformer').destroy()
+    const transformerList = this.getStage().find('Transformer')
+    if (transformerList && transformerList.length > 0) {
+      transformerList.forEach(transformer => {
+        transformer.destroy()
+      })
+    }
 
     if (this.cropImage) {
       return

@@ -1,15 +1,15 @@
 <template>
   <div class="home">
-    <button id="cropPhotoEnd" @click="cropEndHandle">cropPhotoEnd</button>
-    <button id="cropPhotoStart" @click="cropStartHandle">cropPhotoStart</button>
-    <button id="cropPhotoReset" @click="cropResetHandle">cropPhotoReset</button>
+    <button id="cropPhotoEnd" @click="cropEndHandle">裁剪结束</button>
+    <button id="cropPhotoStart" @click="cropStartHandle">裁剪开始</button>
+    <button id="cropPhotoReset" @click="cropResetHandle">裁剪重置</button>
     <div id="container"></div>
   </div>
 </template>
 
 <script>
 import Konva from 'konva'
-// import konvaCrop from '@/utils/konva-crop.js'
+import konvaCrop from '@/utils/konva-crop.js'
 export default {
   name: 'Home',
   components: {},
@@ -25,6 +25,7 @@ export default {
   created () {},
   mounted () {
     console.log('Konva', Konva)
+    console.log(konvaCrop)
     this.initStage()
     this.initImg(this.defaultImg)
   },
@@ -41,6 +42,10 @@ export default {
       console.log(this.target)
       this.target && this.target.cropReset()
     },
+    // 销毁变形
+    destroyTransformer () {
+      this.transformer && this.transformer.destroy()
+    },
     initStage () {
       this.stage = new Konva.Stage({
         container: 'container',
@@ -51,9 +56,8 @@ export default {
       this.stage.add(this.layer)
 
       this.stage.on('click tap', (e) => {
-        if (this.transformer) {
-          this.transformer.destroy()
-        }
+        console.log(e)
+        this.destroyTransformer()
         if (e.target === this.stage || e.target.isCroppingElement) {
           this.layer.draw()
           return
@@ -90,12 +94,12 @@ export default {
             y: -100.75893930126733
           }
         })
-        // konvaImage.enableCropOnDblClick()
+        konvaImage.enableCropOnDblClick()
         this.layer.add(konvaImage)
         this.layer.draw()
-        // setTimeout(() => {
-        //   konvaImage.cropStart()
-        // })
+        setTimeout(() => {
+          // konvaImage.cropStart()
+        })
       })
 
       Konva.Image.fromURL(src, (konvaImage) => {
@@ -112,7 +116,7 @@ export default {
             height: 20
           }
         })
-        // konvaImage.enableCropOnDblClick()
+        konvaImage.enableCropOnDblClick()
         this.layer.add(konvaImage)
         this.layer.draw()
       })
