@@ -184,6 +184,8 @@ import Konva from 'konva'
     layer.add(this.cropImageTransformer, this.transformer)
     // 到这里为止，在原图的基础上，创建了一张新的裁剪透明图，并在原图和裁剪透明图上创建动画，坐标与原图相同
 
+    // 最终实现裁剪思路，原图的变换框（transformer）保持不变， 原图和透明裁剪示意图保持相同的变换（移动、旋转），达到变换透明裁剪图引导原图变换的效果，原图移动到示意图指定位置后，删除transformer以及透明引导图
+
     this.cropUpdateBinded = this.cropUpdate.bind(this)
 
     this.resizAndCropUpdateBinded = function () {
