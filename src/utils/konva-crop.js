@@ -75,6 +75,7 @@ import Konva from 'konva'
       offsetX: 0,
       offsetY: 0
     })
+    console.log('_cropElement', this._cropElement)
   }
 
   Konva.Image.prototype.getCropTransform = function () {
@@ -135,10 +136,10 @@ import Konva from 'konva'
         transformer.destroy()
       })
     }
-
     if (this.cropImage) {
       return
     }
+    // _cropElement 设置裁剪变换
     if (!this._cropElement) {
       this.cropTransform({
         x: 0,
@@ -154,6 +155,7 @@ import Konva from 'konva'
     const transform0 = layer.getAbsoluteTransform()
     const options = qrDecompose(transform0.copy().invert().multiply(transform).multiply(transform2).getMatrix())
 
+    // 生成一张透明的裁剪操作图
     this.cropImage = new Konva.Image({
       stroke: this.stroke(),
       strokeWidth: this.strokeWidth(),
@@ -171,7 +173,7 @@ import Konva from 'konva'
     layer.add(this.cropImage)
     this.cropImageTransformer = new Konva.Transformer({
       borderDash: [5, 5],
-      anchorSize: 21,
+      anchorSize: 20,
       anchorCornerRadius: 11
     })
       .attachTo(this.cropImage)
@@ -180,6 +182,7 @@ import Konva from 'konva'
       .attachTo(this)
 
     layer.add(this.cropImageTransformer, this.transformer)
+    // 到这里为止，在原图的基础上，创建了一张新的裁剪透明图，并在原图和裁剪透明图上创建动画，坐标与原图相同
 
     this.cropUpdateBinded = this.cropUpdate.bind(this)
 
@@ -190,6 +193,7 @@ import Konva from 'konva'
 
     this.resize()
     this.cropUpdate()
+    // 监听透明裁剪图的拖拽事件，让裁剪原图跟随透明裁剪图移动
     this.cropImage.on('dragmove', this.cropUpdateBinded)
     this.cropImage.on('transform', this.cropUpdateBinded)
     this.on('dragmove', this.cropUpdateBinded)

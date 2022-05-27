@@ -69,8 +69,8 @@ export default {
         this.transformer.nodes([e.target])
         this.layer.batchDraw()
       })
-      this.stage.scaleX(2)
-      this.stage.scaleY(2)
+      // this.stage.scaleX(2)
+      // this.stage.scaleY(2)
     },
 
     // 初始化图片
@@ -81,18 +81,18 @@ export default {
           strokeWidth: 1,
           y: 100,
           x: 118,
-          width: 200,
-          height: 125,
-          draggable: true,
-          cropTransform: {
-            height: 175,
-            rotation: 10,
-            scaleX: 1.256718546954032,
-            scaleY: 1.6075454233616444,
-            width: 250,
-            x: -23.179330196090106,
-            y: -100.75893930126733
-          }
+          width: 375,
+          height: 211,
+          draggable: true
+          // cropTransform: {
+          //   height: 175,
+          //   rotation: 10,
+          //   scaleX: 1.256718546954032,
+          //   scaleY: 1.6075454233616444,
+          //   width: 250,
+          //   x: -23.179330196090106,
+          //   y: -100.75893930126733
+          // }
         })
         konvaImage.enableCropOnDblClick()
         this.layer.add(konvaImage)
@@ -102,24 +102,24 @@ export default {
         })
       })
 
-      Konva.Image.fromURL(src, (konvaImage) => {
-        konvaImage.setAttrs({
-          y: 50,
-          x: 350,
-          width: 300,
-          height: 300,
-          draggable: true,
-          clip: {
-            x: 100,
-            y: 40,
-            width: 10,
-            height: 20
-          }
-        })
-        konvaImage.enableCropOnDblClick()
-        this.layer.add(konvaImage)
-        this.layer.draw()
-      })
+      // Konva.Image.fromURL(src, (konvaImage) => {
+      //   konvaImage.setAttrs({
+      //     y: 50,
+      //     x: 350,
+      //     width: 300,
+      //     height: 300,
+      //     draggable: true,
+      //     clip: {
+      //       x: 100,
+      //       y: 40,
+      //       width: 10,
+      //       height: 20
+      //     }
+      //   })
+      //   konvaImage.enableCropOnDblClick()
+      //   this.layer.add(konvaImage)
+      //   this.layer.draw()
+      // })
     }
   }
 }
